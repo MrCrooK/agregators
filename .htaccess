@@ -1,0 +1,6 @@
+<Files index.php> 
+ AuthName "Boroda vam!!!"
+AuthType Basic
+AuthUserFile /home/bitrix/www/info/.htpasswd
+require valid-user
+</Files>
