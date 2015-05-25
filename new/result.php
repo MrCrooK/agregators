@@ -174,8 +174,8 @@ $query = "SELECT * FROM `nbkinew` ORDER BY id DESC"; //lnmoney
 $result = mysql_query($query); 
 while($line = mysql_fetch_array($result, MYSQL_ASSOC)) {
 $d = new DateTime($line['timestamp']);
-if($d->format("d.m.Y")!=$olddate) {echo "<h1>".$d->format("d.m.Y")."</h1>";}
-$olddate=$d->format("d.m.Y");
+if($d->format("d.m.Y")!=$olddate) {if($ni) echo "<br><b>Заявок за день: ".$ni."</b><br>"; echo "<h1>".$d->format("d.m.Y")."</h1>";$ni=0;}
+$olddate=$d->format("d.m.Y");$ni++;
 echo "<a href='?numid=".$line['numid']."'>".$line['numid']."</a>, ";
 }}
 ?>
