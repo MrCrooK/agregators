@@ -2,7 +2,7 @@
 if($_REQUEST["ldate"]&&$_REQUEST["propcity"]&&$_REQUEST['lfam']&&$_REQUEST['lname']&&$_REQUEST["id"]) {
 $dateb = explode(".", $_REQUEST["ldate"] );
 
-$_REQUEST["propcity"] = trim(str_replace(array("г.","д.","п."),"",$_REQUEST["propcity"]));
+$propcity = trim(str_replace(array("рп.","г.","д.","п.","гор."),"",$_REQUEST["propcity"]));
 
 //VK Start
 require 'vkapi.class.php';
@@ -12,9 +12,16 @@ $vk_id = '288553600'; // Insert here you vk id
  
 $VK = new vkapi($api_id, $vk_id);
  
-$resp = $VK->api('database.getCities', array('q'=>$_REQUEST['propcity'],'country_id'=>'1','count'=>'1'));
-$city = $resp->items->city->id;
- 
+$resp = $VK->api('database.getCities', array('q'=>$propcity,'country_id'=>'1','count'=>'100'));
+
+foreach($resp->items->city as $cities) {
+	//echo $cities->title." ".$cities->region."<br>";
+	if($cities->region=="Свердловская область") {$city = $cities->id; break;}
+	if($cities->region=="Челябинская область") {$city = $cities->id; break;}
+}
+if(!$city) $city = $resp->items->city->id;
+//echo $city;
+
 $resp = $VK->api('users.search', array('q'=>$_REQUEST['lfam']." ".$_REQUEST['lname'],'count'=>'1','country'=>'1','city'=>$city,'birth_day'=>$dateb[0],'birth_month'=>$dateb[1],'birth_year'=>$dateb[2],));
 $uid = $resp->items->user->id;
 $type="full birth";
@@ -51,7 +58,7 @@ endforeach;
 endif;
 $tableVK .= "<div style='width: 100%; clear: both;'></div></div>";
 //VK End
-
+echo $tableVK;
 //Подключаемся к БД
 require("dbconnect.php");
 mysql_query("UPDATE `nbkinew` SET `vk` = '".addslashes($tableVK)."', `vkvalid` = '1' WHERE `id` = ".$_REQUEST["id"].";");

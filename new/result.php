@@ -29,9 +29,9 @@ span {color: #255b8e;}
 .clasitm7 {width: 12px; height: 12px; line-height: 12px; text-align: center; color: #fff; border: 1px solid #000000; background: #000000;}
 .clasitm8 {width: 12px; height: 12px; line-height: 12px; text-align: center; color: #fff; border: 1px solid #000000; background: #000000;}
 .clasitm9 {width: 12px; height: 12px; line-height: 12px; text-align: center; color: #fff; border: 1px solid #000000; background: #000000;}
-.clVK {color: #255b8e;width: 380px;background:#e1e7ed;border:1px solid #d3dae0;float:left;padding:5px;margin:5px 0;}
+.clVK {color: #255b8e;width: 650px;background:#e1e7ed;border:1px solid #d3dae0;float:left;padding:5px;margin:5px 0;}
 .clVK a {color: #255b8e;}
-.clOK {color: #255b8e;width: 380px;background:#e1e7ed;border:1px solid #d3dae0;float:right;padding:5px;margin:5px 0;}
+.clOK {color: #255b8e;width: 650px;background:#e1e7ed;border:1px solid #d3dae0;float:right;padding:5px;margin:5px 0;}
 .clOK a {color: #255b8e;}
 
 .app_result_head {

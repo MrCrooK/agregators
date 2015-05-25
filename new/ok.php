@@ -2,7 +2,7 @@
 if($_REQUEST["ldate"]&&$_REQUEST["propcity"]&&$_REQUEST['lfam']&&$_REQUEST['lname']&&$_REQUEST["id"]) {
 $dateb = explode(".", $_REQUEST["ldate"] );
 
-$_REQUEST["propcity"] = trim(str_replace(array("г.","д.","п."),"",$_REQUEST["propcity"]));
+$_REQUEST["propcity"] = trim(str_replace(array("рп.","г.","д.","п.","гор."),"",$_REQUEST["propcity"]));
 
 //OK Start
 $urlauth = 'https://www.ok.ru/https';

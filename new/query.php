@@ -4,6 +4,11 @@ foreach($_REQUEST as $key => $val)
 	$str .= $key .":". $val."\r\n";
 
 file_put_contents('log.txt',$str,FILE_APPEND);
+$querystr = '';
+foreach($_REQUEST as $key => $val) {
+	$querystr .= $key ."=". trim(str_replace(' ','+',$val))."&";
+	$arQuery[$key] = trim(str_replace(' ','+',$val));
+}
 
 //Подключаемся к БД
 require("dbconnect.php");
@@ -23,7 +28,8 @@ curl_close($curl);
 
 //VK include
 //require 'vk.php';
-$curl = curl_init('https://portal.lnmoney.ru/info/new/vk.php?ldate='.$_REQUEST["ldate"].'&propcity='.$_REQUEST["propcity"].'&lfam='.$_REQUEST["lfam"].'&lname='.$_REQUEST["lname"].'&id='.$latest_id);
+file_put_contents('log.txt','https://portal.lnmoney.ru/info/new/vk.php?ldate='.$arQuery["ldate"].'&propcity='.$arQuery["propcity"].'&lfam='.$arQuery["lfam"].'&lname='.$arQuery["lname"].'&id='.$latest_id,FILE_APPEND);
+$curl = curl_init('https://portal.lnmoney.ru/info/new/vk.php?ldate='.$arQuery["ldate"].'&propcity='.$arQuery["propcity"].'&lfam='.$arQuery["lfam"].'&lname='.$arQuery["lname"].'&id='.$latest_id);
 curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 1);
 curl_setopt($curl, CURLOPT_TIMEOUT, 1);       
 $response = curl_exec($curl);
@@ -31,7 +37,7 @@ curl_close($curl);
 
 //OK include
 //require 'ok.php';
-$curl = curl_init('https://portal.lnmoney.ru/info/new/ok.php?ldate='.$_REQUEST["ldate"].'&propcity='.$_REQUEST["propcity"].'&lfam='.$_REQUEST["lfam"].'&lname='.$_REQUEST["lname"].'&id='.$latest_id);
+$curl = curl_init('https://portal.lnmoney.ru/info/new/ok.php?ldate='.$arQuery["ldate"].'&propcity='.$arQuery["propcity"].'&lfam='.$arQuery["lfam"].'&lname='.$arQuery["lname"].'&id='.$latest_id);
 curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 1);
 curl_setopt($curl, CURLOPT_TIMEOUT, 1);       
 $response = curl_exec($curl);
@@ -55,8 +61,6 @@ curl_close($curl);
 
 //NBKI include
 //require 'nbki.php';
-$querystr = '';
-foreach($_REQUEST as $key => $val) $querystr .= $key ."=". trim(str_replace(' ','+',$val))."&";
 $curl = curl_init('https://portal.lnmoney.ru/info/new/nbki.php?'.$querystr.'id='.$latest_id);
 curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 1);
 curl_setopt($curl, CURLOPT_TIMEOUT, 1);       

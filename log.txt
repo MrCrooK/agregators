@@ -1,10 +1,10 @@
-05.25.2015 09:52:03
-pseri:6514
-pnum:953862
-lotch:Вадимовна
+05.25.2015 11:10:32
+pseri:6505
+pnum:274848
+lotch:А
 lfam:Бакун
-lname:Инна
-ldate:14.12.1993
+lname:Елена
+ldate:13.08.1967
 propcity:Первоуральск
-numid:1923
+numid:1925
 region:66
