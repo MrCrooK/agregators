@@ -30,12 +30,6 @@ if(!$uid) {
 	$uid = $resp->items->user->id;
 	$type="birth no year";
 }
-if(!$uid) {
-	$resp = $VK->api('users.search', array('q'=>$_REQUEST['lfam']." ".$_REQUEST['lname'],'count'=>'1','country'=>'1','city'=>$city));
-	$uid = $resp->items->user->id;
-	$type="no birth";
-}
-
 
 if($uid){
 $resp = $VK->api('users.get', array('user_ids'=>$uid,'name_case'=>'Nom','fields'=>'sex,bdate,city,country,photo_50,photo_100,photo_200_orig,photo_200,photo_400_orig,photo_max,photo_max_orig,photo_id,online,online_mobile,domain,has_mobile,contacts,connections,site,education,universities,schools,can_post,can_see_all_posts,can_see_audio,can_write_private_message,status,last_seen,common_count,relation,relatives,counters,screen_name,maiden_name,timezone,occupation,activities,interests,music,movies,tv,books,games,about,quotes,personal'));
@@ -45,7 +39,7 @@ $igm = file_get_contents($resp->user->photo_100);
 file_put_contents('img/'.md5($igm),$igm);
 $uimg='img/'.md5($igm);
 
-$tableVK = "<div  class='clVK'>Профиль ВКонтакте <a href='http://vk.com/id".$resp->user->id."'>".$resp->user->first_name." ".$resp->user->last_name."</a> ".$type."<br>
+$tableVK = "<div  class='clVK'>Профиль ВКонтакте <a href='http://vk.com/id".$resp->user->id."'>".$resp->user->first_name." ".$resp->user->last_name."</a><br>
 <img align='left' src='".$uimg."'>Город: ".$resp->user->city->title."<br>Skype: ".$resp->user->skype."<br>Телефон: ".$resp->user->home_phone."<br>День рождения: ".$resp->user->bdate."<br>";
 
 if($resp->user->relatives->relative):

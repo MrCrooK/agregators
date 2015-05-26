@@ -79,26 +79,6 @@ if(!$res) {
 	$type="birth no year";
 }
 
-if(!$res) {
-	$urlsear = 'http://ok.ru/dk?st.cmd=searchResult&st.query='.$_REQUEST['lfam'].'%20'.$_REQUEST['lname'].'&st.location='.$_REQUEST['propcity'].'&st.country=10414533690&st.mode=Users&st.grmode=Groups&st.posted=set';
-	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_POST, true);
-	curl_setopt($ch, CURLOPT_USERAGENT, $user_agent);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	curl_setopt($ch, CURLOPT_COOKIEFILE, ('cookie.txt'));
-	curl_setopt($ch, CURLOPT_COOKIEJAR, ('cookie.txt'));
-	curl_setopt($ch, CURLOPT_HEADER, true);
-	curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-	curl_setopt($ch, CURLOPT_URL, $urlsear );
-	curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
-	$answer = curl_exec($ch);
-	curl_close($ch);
-
-	if(preg_match('~data-log-click="(.*?)"~', $answer, $res));	
-	$type="no birth";
-}
-
 if(preg_match('{"searchfb":"([0-9]*?),([0-9]*?),([0-9]*?),([0-9]*?)"}', html_entity_decode($res[1]), $rest));
 /*echo "<pre>";print_r($rest);echo "</pre>";*/
 if($rest[3]) {
@@ -111,7 +91,7 @@ file_put_contents('img/'.md5($igm),$igm);
 $uimg='img/'.md5($igm);
 
 
-$tableOK = "<div class='clOK'>Профиль Однокласники <a href='http://ok.ru/profile/".$rest[3]."'>".$arOK[0]->name."</a> ".$type."<br>";
+$tableOK = "<div class='clOK'>Профиль Однокласники <a href='http://ok.ru/profile/".$rest[3]."'>".$arOK[0]->name."</a><br>";
 $tableOK .= "<img align='left' src='".$uimg."'>";
 $tableOK .= "День рождения: ".$arOK[0]->birthday."<br>";
 $tableOK .= "Город: ".$arOK[0]->location->city."<br>";

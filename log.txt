@@ -1,10 +1,10 @@
-05.25.2015 11:10:32
-pseri:6505
-pnum:274848
-lotch:А
-lfam:Бакун
-lname:Елена
-ldate:13.08.1967
-propcity:Первоуральск
-numid:1925
+05.26.2015 00:51:34
+pseri:8005
+pnum:294472
+lotch:Михайлович
+lfam:Давлетов
+lname:Динар
+ldate:22.09.1983
+propcity:Ревда
+numid:1926
 region:66
